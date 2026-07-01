@@ -7,7 +7,8 @@
 
 <title>To-Do List</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -15,7 +16,23 @@
 
 <h1>To-Do List</h1>
 
-<p>Aplicação utilizada no trabalho de CI/CD.</p>
+<form action="/add" method="POST">
+
+<input
+type="text"
+name="title"
+placeholder="Nova tarefa"
+required>
+
+<button type="submit">
+
+Adicionar
+
+</button>
+
+</form>
+
+<hr>
 
 <ul>
 
@@ -23,13 +40,37 @@
 
 <li>
 
+{% if tarefa.completed %}
+
+<s>{{ tarefa.title }}</s>
+
+{% else %}
+
 {{ tarefa.title }}
+
+{% endif %}
+
+<a href="/complete/{{ tarefa.id }}">
+
+✔
+
+</a>
+
+<a href="/delete/{{ tarefa.id }}">
+
+🗑
+
+</a>
 
 </li>
 
 {% else %}
 
-<li>Nenhuma tarefa cadastrada.</li>
+<li>
+
+Nenhuma tarefa cadastrada.
+
+</li>
 
 {% endfor %}
 
