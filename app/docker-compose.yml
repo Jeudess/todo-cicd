@@ -1,0 +1,12 @@
+services:
+  todo-app:
+    build: .
+    container_name: todo-app
+
+    ports:
+      - "80:5000"
+
+    env_file:
+      - .env
+
+    restart: unless-stopped
